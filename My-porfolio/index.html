@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeitun Mahamoud | Frontend Developer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Zeitun Mahamoud</h1>
+    <p>Frontend Developer</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      Hi, I’m Zeitun Mahamoud — a passionate Frontend Developer who loves
+      crafting clean, responsive, and accessible web experiences using HTML and CSS.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+      <li>HTML</li>
+      <li>CSS</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="repo-grid">
+      <!-- Custom Featured Projects -->
+      <div class="repo-card">
+        <h3>Flyer Form</h3>
+        <p>A clean and simple flyer layout designed with HTML and CSS — perfect for event or business promotion.</p>
+        <a href="https://github.com/ITZeitun/flyer" target="_blank">View on GitHub</a>
+      </div>
+
+      <div class="repo-card">
+        <h3>Cafe Menu Form</h3>
+        <p>A responsive cafe menu form built using HTML and CSS, styled for readability and elegant presentation.</p>
+        <a href="https://github.com/ITZeitun/cafe-menu" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+
+    <h3 class="subheading">Latest GitHub Repositories</h3>
+    <div id="repo-container" class="repo-grid">
+      <!-- GitHub repositories will load here -->
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:zeitunmahamoud2019@gmail.com">zeitunmahamoud2019@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/zeitun-mahamoud" target="_blank">Zeitun Mahamoud</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Zeitun Mahamoud</p>
+  </footer>
+
+  <script>
+    // Fetch the 3 latest repos from ITZeitun
+    fetch("https://api.github.com/users/ITZeitun/repos?sort=updated&per_page=3")
+      .then(response => response.json())
+      .then(repos => {
+        const container = document.getElementById("repo-container");
+        repos.forEach(repo => {
+          const repoCard = document.createElement("div");
+          repoCard.classList.add("repo-card");
+          repoCard.innerHTML = `
+            <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+            <p>${repo.description || "No description provided."}</p>
+          `;
+          container.appendChild(repoCard);
+        });
+      })
+      .catch(error => {
+        document.getElementById("repo-container").innerHTML = "<p>Unable to load repositories.</p>";
+        console.error(error);
+      });
+  </script>
+</body>
+</html>
